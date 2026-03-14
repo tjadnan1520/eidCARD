@@ -1,0 +1,542 @@
+:root {
+  --primary: #ffffff;
+  --secondary: #f5f5dc;
+  --accent: #c9a227;
+  --secondary-accent: #e5e7eb;
+  --text: #374151;
+  --radius-lg: 24px;
+  --radius-md: 14px;
+  --shadow-soft: 0 18px 45px rgba(55, 65, 81, 0.18);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text);
+  font-family: "Manrope", sans-serif;
+  background:
+    radial-gradient(circle at 18% 10%, rgba(201, 162, 39, 0.16), transparent 42%),
+    radial-gradient(circle at 85% 86%, rgba(229, 231, 235, 0.88), transparent 45%),
+    linear-gradient(155deg, #ffffff 0%, #f5f5dc 58%, #ffffff 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  padding: 30px 20px 0;
+  overflow-x: hidden;
+}
+
+.page-glow {
+  position: fixed;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(75px);
+  z-index: 0;
+}
+
+.page-glow-left {
+  top: -120px;
+  left: -100px;
+  background: rgba(201, 162, 39, 0.25);
+}
+
+.page-glow-right {
+  right: -120px;
+  bottom: -120px;
+  background: rgba(229, 231, 235, 0.72);
+}
+
+.container {
+  width: min(1140px, 100%);
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 22px;
+  position: relative;
+  z-index: 1;
+  margin: 0 auto;
+  flex: 1;
+  align-content: start;
+}
+
+.panel {
+  grid-column: span 12;
+  background: rgba(255, 255, 255, 0.84);
+  border: 1px solid rgba(55, 65, 81, 0.16);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  padding: 28px;
+  backdrop-filter: blur(5px);
+}
+
+.panel-landing {
+  text-align: center;
+  padding: 48px 34px;
+}
+
+h1,
+h2 {
+  font-family: "Cinzel", serif;
+  margin-top: 10px;
+  margin-bottom: 12px;
+  color: var(--text);
+}
+
+h1 {
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  line-height: 1.1;
+}
+
+h2 {
+  font-size: clamp(1.4rem, 2.5vw, 1.95rem);
+}
+
+.intro {
+  max-width: 650px;
+  margin: 0 auto 24px;
+  line-height: 1.6;
+}
+
+.hidden {
+  display: none;
+}
+
+form {
+  display: grid;
+  gap: 10px;
+}
+
+label {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  border: 1px solid rgba(55, 65, 81, 0.28);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  font: inherit;
+  background: var(--primary);
+  color: var(--text);
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: 3px solid rgba(201, 162, 39, 0.32);
+  outline-offset: 2px;
+}
+
+.hint {
+  margin: 6px 0 10px;
+  color: #4b5563;
+  font-size: 0.92rem;
+}
+
+#messageCounter {
+  margin-top: -6px;
+  font-weight: 700;
+  color: #6b7280;
+}
+
+.btn {
+  border-radius: 999px;
+  padding: 12px 22px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: "Manrope", sans-serif;
+  transition: transform 0.16s ease, box-shadow 0.16s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn-primary {
+  border: none;
+  color: #ffffff;
+  background: linear-gradient(120deg, #b7921f 0%, #c9a227 52%, #dec57b 100%);
+  box-shadow: 0 12px 25px rgba(201, 162, 39, 0.34);
+}
+
+.btn-secondary {
+  border: 1px solid rgba(55, 65, 81, 0.24);
+  color: var(--text);
+  background: #f9fafb;
+}
+
+#previewSection {
+  display: grid;
+  gap: 16px;
+  justify-items: center;
+}
+
+.eid-card {
+  width: min(100%, 860px);
+  aspect-ratio: 16 / 9;
+  margin: 0 auto;
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 26px 52px rgba(55, 65, 81, 0.2);
+  animation: riseIn 0.5s ease both;
+}
+
+.eid-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 25% 30%, rgba(255, 255, 255, 0.55) 0 3px, transparent 3px),
+    radial-gradient(circle at 75% 70%, rgba(255, 255, 255, 0.55) 0 3px, transparent 3px),
+    repeating-radial-gradient(circle at 0 0, transparent 0 26px, rgba(229, 231, 235, 0.74) 26px 29px),
+    repeating-radial-gradient(circle at 30px 30px, transparent 0 26px, rgba(229, 231, 235, 0.74) 26px 29px),
+    linear-gradient(130deg, #ffffff 0%, #f8f8ea 100%);
+  background-size: 120px 120px, 140px 140px, 64px 64px, 64px 64px, auto;
+  opacity: 0.96;
+  z-index: 0;
+}
+
+.card-pattern {
+  position: absolute;
+  inset: 8.5%;
+  background: linear-gradient(150deg, #ffffff 0%, #f5f5dc 52%, #e5e7eb 100%);
+  border: 2px solid rgba(201, 162, 39, 0.42);
+  box-shadow:
+    inset 0 0 0 6px rgba(255, 255, 255, 0.85),
+    inset 0 0 0 7px rgba(201, 162, 39, 0.25),
+    0 16px 30px rgba(55, 65, 81, 0.2);
+  clip-path: polygon(
+    10% 0,
+    90% 0,
+    95% 6%,
+    100% 18%,
+    100% 82%,
+    95% 94%,
+    90% 100%,
+    10% 100%,
+    5% 94%,
+    0 82%,
+    0 18%,
+    5% 6%
+  );
+  z-index: 1;
+}
+
+.card-stars {
+  position: absolute;
+  inset: 11%;
+  z-index: 2;
+  opacity: 0.26;
+  background-image:
+    radial-gradient(circle at 22% 24%, rgba(201, 162, 39, 0.66) 0 1.2px, transparent 1.6px),
+    radial-gradient(circle at 76% 20%, rgba(201, 162, 39, 0.66) 0 1.2px, transparent 1.6px),
+    radial-gradient(circle at 12% 82%, rgba(201, 162, 39, 0.45) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 84% 78%, rgba(201, 162, 39, 0.45) 0 1px, transparent 1.5px);
+}
+
+.crescent {
+  position: absolute;
+  top: 18%;
+  right: 13.5%;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  box-shadow: -9px 0 0 0 var(--accent);
+  z-index: 3;
+}
+
+.card-content {
+  position: absolute;
+  inset: 17% 14% 11%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  z-index: 3;
+  color: var(--text);
+}
+
+.card-title {
+  margin: 62px 0 0;
+  font-family: "Cinzel", serif;
+  font-size: clamp(1.7rem, 4vw, 3rem);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.card-subtitle {
+  margin: 2px 0 0;
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(0.85rem, 1.2vw, 1rem);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(55, 65, 81, 0.75);
+}
+
+.card-greeting {
+  margin: 24px 0 8px;
+  font-size: clamp(1.05rem, 1.8vw, 1.28rem);
+  font-family: "Amiri", serif;
+  color: #4b5563;
+}
+
+.card-message {
+  margin: 4px auto;
+  max-width: 88%;
+  white-space: pre-wrap;
+  line-height: 1.58;
+  font-size: clamp(1rem, 1.58vw, 1.18rem);
+  color: #6b7280;
+}
+
+.card-closing {
+  margin-top: auto;
+  text-align: center;
+}
+
+.card-signoff {
+  margin: 12px 0 2px;
+  font-size: 0.95rem;
+  color: #4b5563;
+}
+
+.card-sender {
+  margin: 0;
+  font-family: "Great Vibes", cursive;
+  font-size: clamp(1.3rem, 2.1vw, 1.8rem);
+  line-height: 1.2;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  color: var(--accent);
+}
+
+.lang-bn .card-title,
+.lang-bn .card-greeting,
+.lang-bn .card-message,
+.lang-bn .card-signoff,
+.lang-bn .card-sender,
+.lang-bn .card-subtitle {
+  font-family: "Hind Siliguri", sans-serif;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.lang-bn .card-title {
+  font-weight: 700;
+  font-size: clamp(1.6rem, 3.8vw, 2.6rem);
+}
+
+.design-classic .card-pattern {
+  background: linear-gradient(150deg, #ffffff 0%, #f5f5dc 52%, #e5e7eb 100%);
+}
+
+.design-classic .card-content,
+.design-letter .card-content {
+  inset: 16% 12% 12%;
+}
+
+.design-classic .card-title,
+.design-letter .card-title {
+  margin-top: 46px;
+  font-size: clamp(1.55rem, 3.2vw, 2.6rem);
+}
+
+.design-classic .card-greeting,
+.design-letter .card-greeting {
+  margin: 16px 0 6px;
+}
+
+.design-classic .card-message,
+.design-letter .card-message {
+  max-width: 90%;
+  font-size: clamp(0.96rem, 1.36vw, 1.08rem);
+  line-height: 1.5;
+}
+
+.design-classic .card-sender,
+.design-letter .card-sender {
+  font-size: clamp(1.1rem, 1.7vw, 1.5rem);
+}
+
+.design-letter .card-pattern {
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(180, 155, 84, 0.08) 0 1px,
+      transparent 1px 34px
+    ),
+    linear-gradient(145deg, #fbf7e8 0%, #f5f5dc 68%, #ece4c8 100%);
+  border-color: rgba(171, 138, 45, 0.5);
+}
+
+.design-letter .card-greeting,
+.design-letter .card-signoff {
+  font-family: "Amiri", serif;
+}
+
+.design-letter .card-sender {
+  font-family: "Great Vibes", cursive;
+  font-size: clamp(1.4rem, 2.2vw, 1.95rem);
+}
+
+.design-long {
+  width: min(100%, 650px);
+  aspect-ratio: 4 / 5;
+}
+
+.design-long .card-pattern {
+  inset: 7%;
+  clip-path: none;
+  border-radius: 20px;
+  background: linear-gradient(160deg, #ffffff 0%, #f5f5dc 62%, #ece9db 100%);
+}
+
+.design-long .card-content {
+  inset: 13% 11% 9%;
+}
+
+.design-long .crescent {
+  top: 11%;
+  right: 14%;
+}
+
+.design-long .card-title {
+  margin-top: 50px;
+}
+
+.design-long .card-message {
+  max-width: 92%;
+  font-size: clamp(1.02rem, 1.34vw, 1.16rem);
+}
+
+.design-long .card-closing {
+  margin-top: 16px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.site-footer {
+  width: 100%;
+  text-align: center;
+  padding: 14px 16px 20px;
+  color: #4b5563;
+  font-family: "Cinzel", serif;
+  letter-spacing: 0.03em;
+  margin-top: auto;
+}
+
+.site-footer p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+#previewTitle {
+  justify-self: start;
+}
+
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.99);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (min-width: 1100px) {
+  #formSection,
+  #previewSection {
+    grid-column: span 12;
+  }
+}
+
+@media (max-width: 760px) {
+  body {
+    padding: 20px 12px 0;
+  }
+
+  .panel {
+    padding: 22px;
+  }
+
+  .eid-card {
+    aspect-ratio: 5 / 4;
+  }
+
+  .card-content {
+    inset: 14% 10% 10%;
+  }
+
+  .crescent {
+    top: 15.5%;
+    right: 11%;
+    width: 52px;
+    height: 52px;
+    box-shadow: -8px 0 0 0 var(--accent);
+  }
+
+  .card-title {
+    margin-top: 48px;
+  }
+
+  .card-sender {
+    font-size: clamp(1.2rem, 5.6vw, 1.6rem);
+  }
+
+  .design-long {
+    aspect-ratio: 5 / 6;
+  }
+
+  .design-classic .card-content,
+  .design-letter .card-content {
+    inset: 14% 9% 11%;
+  }
+}
+
+@media (max-width: 540px) {
+  .panel {
+    padding: 20px;
+    border-radius: 20px;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .eid-card {
+    aspect-ratio: 1 / 1;
+  }
+
+  .card-content {
+    inset: 15% 8%;
+  }
+
+  .card-message {
+    max-width: 94%;
+  }
+}

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eid Card Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cinzel:wght@500;700&family=Great+Vibes&family=Hind+Siliguri:wght@400;500;700&family=Manrope:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page-glow page-glow-left" aria-hidden="true"></div>
+    <div class="page-glow page-glow-right" aria-hidden="true"></div>
+
+    <main class="container">
+      <section id="landing" class="panel panel-landing">
+        <h1>Eid Mubarak</h1>
+        <p class="intro">
+          Eid Mubarak to everyone. Send warm wishes to your family, friends,
+          and loved ones with a beautiful personalized Eid card.
+        </p>
+        <button id="startBtn" class="btn btn-primary" type="button">
+          Create Your Card
+        </button>
+      </section>
+
+      <section id="formSection" class="panel hidden" aria-labelledby="formTitle">
+        <h2 id="formTitle">Compose Your Greeting</h2>
+        <form id="cardForm" novalidate>
+          <label for="toName">To</label>
+          <input id="toName" name="toName" type="text" placeholder="Receiver name" required />
+
+          <label for="fromName">From</label>
+          <input id="fromName" name="fromName" type="text" placeholder="Sender name" required />
+
+          <label for="design">Card Design</label>
+          <select id="design" name="design">
+            <option value="classic">Classic Frame</option>
+            <option value="letter">Letter Style</option>
+            <option value="long">Long Page</option>
+          </select>
+
+          <label for="language">Language</label>
+          <select id="language" name="language">
+            <option value="en">English</option>
+            <option value="bn">Bangla</option>
+          </select>
+
+          <label for="message">Message (optional)</label>
+          <textarea
+            id="message"
+            name="message"
+            rows="5"
+            maxlength="220"
+            placeholder="Write your personal Eid greeting"
+          ></textarea>
+
+          <p id="messageLimitHint" class="hint">
+            Leave message empty to use the default blessing text automatically. Max 220 characters.
+          </p>
+          <p id="messageCounter" class="hint">0 / 220</p>
+
+          <button class="btn btn-primary" type="submit">Generate Card</button>
+        </form>
+      </section>
+
+      <section id="previewSection" class="panel hidden" aria-labelledby="previewTitle">
+        <h2 id="previewTitle">Your Eid Card</h2>
+
+        <div id="card" class="eid-card design-classic" role="img" aria-label="Generated Eid greeting card">
+          <div class="card-pattern" aria-hidden="true"></div>
+          <div class="card-stars" aria-hidden="true"></div>
+          <div class="crescent" aria-hidden="true"></div>
+
+          <div class="card-content">
+            <p id="cardTitle" class="card-title">Eid Mubarak</p>
+            <p id="cardSubtitle" class="card-subtitle">To you and your family</p>
+            <p id="cardGreeting" class="card-greeting">Dear Friend,</p>
+            <p id="cardMessage" class="card-message"></p>
+            <div class="card-closing">
+              <p class="card-signoff">Warm wishes,</p>
+              <p id="cardSender" class="card-sender">Your Name</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button id="downloadBtn" class="btn btn-primary" type="button">Download Card</button>
+          <button id="editBtn" class="btn btn-secondary" type="button">Edit Card</button>
+          <button id="newBtn" class="btn btn-secondary" type="button">Generate New</button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Love from Tarek Jamil Adnan</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
