@@ -103,6 +103,32 @@ function updateMessageCounter() {
   messageCounter.textContent = `${messageInput.value.length} / ${max}`;
 }
 
+function createExportStage() {
+  const rect = card.getBoundingClientRect();
+  const exportWidth = Math.max(1, Math.round(rect.width));
+  const exportHeight = Math.max(1, Math.round(rect.height));
+  const stage = document.createElement("div");
+  const clone = card.cloneNode(true);
+
+  stage.className = "export-stage";
+  stage.style.width = `${exportWidth}px`;
+  stage.style.height = `${exportHeight}px`;
+
+  clone.removeAttribute("id");
+  clone.classList.add("export-mode");
+  clone.style.width = `${exportWidth}px`;
+  clone.style.height = `${exportHeight}px`;
+  clone.style.maxWidth = "none";
+  clone.style.aspectRatio = "auto";
+  clone.style.margin = "0";
+  clone.style.display = "block";
+
+  stage.appendChild(clone);
+  document.body.appendChild(stage);
+
+  return { stage, clone, exportWidth, exportHeight };
+}
+
 startBtn.addEventListener("click", () => {
   hideElement(landing);
   showElement(formSection);
@@ -158,6 +184,7 @@ updateMessageCounter();
 
 downloadBtn.addEventListener("click", async () => {
   const previousLabel = downloadBtn.textContent;
+  let exportStage;
 
   try {
     downloadBtn.disabled = true;
@@ -167,17 +194,19 @@ downloadBtn.addEventListener("click", async () => {
       await document.fonts.ready;
     }
 
-    const canvas = await html2canvas(card, {
-      scale: 2,
+    const exportSetup = createExportStage();
+    exportStage = exportSetup.stage;
+
+    const canvas = await html2canvas(exportSetup.clone, {
+      scale: Math.max(2, window.devicePixelRatio || 1),
       useCORS: true,
       backgroundColor: "#ffffff",
-      onclone: (clonedDocument) => {
-        const clonedCard = clonedDocument.getElementById("card");
-
-        if (clonedCard) {
-          clonedCard.classList.add("export-mode");
-        }
-      }
+      width: exportSetup.exportWidth,
+      height: exportSetup.exportHeight,
+      windowWidth: exportSetup.exportWidth,
+      windowHeight: exportSetup.exportHeight,
+      scrollX: 0,
+      scrollY: 0
     });
 
     const link = document.createElement("a");
@@ -195,6 +224,10 @@ downloadBtn.addEventListener("click", async () => {
     window.alert("Could not generate the image. Please try again.");
     console.error("Download failed", error);
   } finally {
+    if (exportStage) {
+      exportStage.remove();
+    }
+
     downloadBtn.disabled = false;
     downloadBtn.textContent = previousLabel;
   }
