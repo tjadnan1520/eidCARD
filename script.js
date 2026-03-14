@@ -163,10 +163,21 @@ downloadBtn.addEventListener("click", async () => {
     downloadBtn.disabled = true;
     downloadBtn.textContent = "Preparing image...";
 
+    if (document.fonts && document.fonts.ready) {
+      await document.fonts.ready;
+    }
+
     const canvas = await html2canvas(card, {
       scale: 2,
       useCORS: true,
-      backgroundColor: null
+      backgroundColor: "#ffffff",
+      onclone: (clonedDocument) => {
+        const clonedCard = clonedDocument.getElementById("card");
+
+        if (clonedCard) {
+          clonedCard.classList.add("export-mode");
+        }
+      }
     });
 
     const link = document.createElement("a");
@@ -180,6 +191,7 @@ downloadBtn.addEventListener("click", async () => {
     link.download = `eid-card-${safeFileReceiver}.png`;
     link.click();
   } catch (error) {
+    // Keep alert simple so users understand why download failed.
     window.alert("Could not generate the image. Please try again.");
     console.error("Download failed", error);
   } finally {
